@@ -11,6 +11,8 @@ import reducer from './reducers'
 import EventsIndex from './components/events_index';
 import EventsNew from './components/events_new'
 import EventsShow from './components/events_show';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -19,16 +21,18 @@ const enhancer = process.env.NODE_ENV === 'development' ?
 const store = createStore(reducer, enhancer)
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <Switch>
+  <MuiThemeProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Switch>
 
-        <Route exact path="/events/new" component={EventsNew} />
-        <Route exact path="/events/:id" component={EventsShow} />
-        <Route exact path="/" component={EventsIndex} />
-      </Switch>
-    </BrowserRouter>
-  </Provider>,
+          <Route exact path="/events/new" component={EventsNew} />
+          <Route exact path="/events/:id" component={EventsShow} />
+          <Route exact path="/" component={EventsIndex} />
+        </Switch>
+      </BrowserRouter>
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root')
 );
 registerServiceWorker();
